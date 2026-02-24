@@ -1,0 +1,4824 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Astrology API",
+    "description": "Professional astrological calculations: natal charts, synastry, transits, horoscopes, tarot, numerology, and more. Powered by Swiss Ephemeris.",
+    "version": "3.2.10"
+  },
+  "servers": [
+    {
+      "url": "https://api.astrology-api.io"
+    }
+  ],
+  "paths": {
+    "/api/v3/charts/natal": {
+      "post": {
+        "summary": "Chart Natal",
+        "description": "🗺️ **Complete Natal Chart Generator** - Full birth chart analysis\n\n**Perfect for:**\n- 🎯 Professional astrological consultations\n- 📱 Comprehensive astrology apps\n- 📊 Complete personality analysis\n- 🎓 Educational astrology tools\n\n**What you get:**\n- **All planetary positions** with houses and signs\n-.",
+        "operationId": "generateNatalChart",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NatalChartRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful natal chart calculation with complete planetary positions, house cusps, and aspects",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NatalChartResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid chart parameters"
+          },
+          "422": {
+            "description": "Validation error - check subject data"
+          }
+        },
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ]
+      }
+    },
+    "/api/v3/charts/synastry": {
+      "post": {
+        "summary": "Synastry (two charts dialogue)",
+        "description": "💬 **Synastry: Dialogue Between Two Charts** - How two people influence each other\n\n**What this is:**\nComparison of two **separate** natal charts. Shows how one person's planets\ninteract with another person's planets (cross-aspects).\nAnswers the question: **\"How do WE affect each other?\"**\n\n**vs.",
+        "operationId": "generateSynastryChart",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SynastryChartRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful synastry chart calculation with cross-aspects between both people's charts",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SynastryChartResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid chart parameters"
+          },
+          "422": {
+            "description": "Validation error - check subject data"
+          }
+        },
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ]
+      }
+    },
+    "/api/v3/charts/composite": {
+      "post": {
+        "summary": "Composite (relationship as entity)",
+        "description": "👶 **Composite: The Third Entity** - The relationship itself as a separate chart\n\n**What this is:**\nCreates a **new chart** from mathematical midpoints between both people's planets.\nThis is the chart of the relationship itself — a \"third entity\" born from two people.\nAnswers the question: **\"What.",
+        "operationId": "generateCompositeChart",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CompositeChartRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful composite chart calculation with midpoint-based planetary positions representing the relationship",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CompositeChartResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid chart parameters"
+          },
+          "422": {
+            "description": "Validation error - check subject data"
+          }
+        },
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ]
+      }
+    },
+    "/api/v3/charts/transit": {
+      "post": {
+        "summary": "Transit Snapshot (specific moment)",
+        "description": "📸 **Transit Snapshot** - Planetary positions at a specific moment\n\n**What this is:**\nA \"photograph\" of the sky at a **specific date/time** overlaid on the natal chart.\nAnswers the question: **\"What's happening in my chart RIGHT NOW?\"**\n\n**Input:** Natal data + exact transit datetime (e.g., \"March.",
+        "operationId": "generateTransitChart",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TransitChartRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful transit chart calculation showing current planetary positions overlaid on natal chart",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TransitChartResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid chart parameters"
+          },
+          "422": {
+            "description": "Validation error - check subject data"
+          }
+        },
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ]
+      }
+    },
+    "/api/v3/charts/solar-return": {
+      "post": {
+        "summary": "Chart Solar Return",
+        "description": "☀️ **Solar Return Chart** - Annual birthday chart for yearly forecasting\n\n**Perfect for:**\n- 🎂 Annual birthday readings\n- 📅 Year-ahead planning and forecasting\n- 🎯 Understanding yearly themes and focus\n- 📊 Professional annual consultations\n\n**What you get:**\n- **Solar return chart** calculated for.",
+        "operationId": "generateSolarReturn",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SolarReturnRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful solar return chart calculation for the exact moment Sun returns to natal degree",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SolarReturnChartResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid chart parameters"
+          },
+          "422": {
+            "description": "Validation error - check subject data"
+          }
+        },
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ]
+      }
+    },
+    "/api/v3/charts/progressions": {
+      "post": {
+        "summary": "Chart Progressions",
+        "description": "Calculates a progression chart based on the specified type.\n\nSupported progression types:\n- **secondary**: Day-for-a-year progressions (most common)\n- **primary**: Degree-for-a-year (not yet implemented)\n- **tertiary**: Day-for-a-month (not yet implemented)\n- **minor**: Month-for-a-year (not yet.",
+        "operationId": "generateProgressions",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProgressionRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful progression chart calculation with evolved planetary positions based on progression method",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProgressionChartResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid chart parameters"
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {}
+            }
+          }
+        },
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ]
+      }
+    },
+    "/api/v3/data/now": {
+      "get": {
+        "summary": "Current Time Data",
+        "description": "Gets astrological data for the current UTC time.",
+        "operationId": "getCurrentSkyData",
+        "responses": {
+          "200": {
+            "description": "Current UTC time data for immediate astrological calculations",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Subject-Output"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid input parameters"
+          },
+          "422": {
+            "description": "Validation error - check field formats"
+          }
+        },
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ]
+      }
+    },
+    "/api/v3/data/positions": {
+      "post": {
+        "summary": "Planetary Positions",
+        "description": "📊 **Planetary Positions Calculator** - Get precise celestial body positions\n\n**Perfect for:**\n- 🎯 Quick planetary position lookups\n- 📱 Mobile app backends requiring fast data\n- 🔄 Real-time astrological applications\n- 📊 Data analysis and research\n\n**What you get:**\n- **Precise positions** for all.",
+        "operationId": "getPlanetaryPositions",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DataRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Precise planetary positions with coordinates, houses, and motion data",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid input parameters"
+          },
+          "422": {
+            "description": "Validation error - check field formats"
+          }
+        },
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ]
+      }
+    },
+    "/api/v3/data/house-cusps": {
+      "post": {
+        "summary": "House Cusps",
+        "description": "🏠 **House Cusps Calculator** - Precise astrological house boundaries\n\n**Perfect for:**\n- 🎯 House system comparisons and analysis\n- 📱 Chart calculation backends\n- 🔄 Real-time house position tracking\n- 📊 Astrological research and education\n\n**What you get:**\n- **All 12 house cusps** with precise.",
+        "operationId": "getHouseCusps",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DataRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Precise astrological house boundaries with zodiac signs and degrees",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid input parameters"
+          },
+          "422": {
+            "description": "Validation error - check field formats"
+          }
+        },
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ]
+      }
+    },
+    "/api/v3/data/aspects": {
+      "post": {
+        "summary": "Aspects",
+        "description": "🔗 **Planetary Aspects Calculator** - Precise angular relationships between celestial bodies\n\n**Perfect for:**\n- 🎯 Chart interpretation and analysis\n- 📱 Astrology app aspect displays\n- 🔄 Real-time aspect tracking\n- 📊 Astrological research and education\n\n**What you get:**\n- **Major aspects** between.",
+        "operationId": "getAspects",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DataRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Planetary aspects with precise orb measurements and relationship types",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid input parameters"
+          },
+          "422": {
+            "description": "Validation error - check field formats"
+          }
+        },
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ]
+      }
+    },
+    "/api/v3/data/lunar-metrics": {
+      "post": {
+        "summary": "Lunar Metrics",
+        "description": "🌙 **Comprehensive Lunar Analysis** - Detailed Moon phase and cycle information\n\n**Perfect for:**\n- 🌙 Lunar timing and planning\n- 📱 Moon phase apps and calendars\n- 🎯 Electional astrology (choosing optimal timing)\n- 📊 Agricultural and natural cycle tracking\n\n**What you get:**\n- **Current Moon phase**.",
+        "operationId": "getLunarMetrics",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DataRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Comprehensive lunar cycle data including phase, distance, and illumination",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid input parameters"
+          },
+          "422": {
+            "description": "Validation error - check field formats"
+          }
+        },
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ]
+      }
+    },
+    "/api/v3/horoscope/sign/daily": {
+      "post": {
+        "summary": "Get Daily Sun Sign Horoscope",
+        "description": "🌟 **Daily Sun-Sign Horoscope** - Fast, cached daily predictions\n\n**Perfect for:**\n- 📱 Mobile apps requiring quick daily horoscope updates\n- 🌐 Websites with generic daily astrology content\n- 📊 High-volume applications needing cached responses\n- 🎯 Users wanting simple sun-sign based guidance\n\n**Key.",
+        "operationId": "getDailyHoroscope",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SunSignDailyRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Daily horoscope with life area predictions and astrological insights",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid horoscope parameters"
+          },
+          "422": {
+            "description": "Validation error - check request format"
+          },
+          "501": {
+            "description": "Feature not yet implemented"
+          }
+        },
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ]
+      }
+    },
+    "/api/v3/horoscope/sign/weekly": {
+      "post": {
+        "summary": "Get Weekly Sun Sign Horoscope",
+        "description": "📅 **Weekly Sun-Sign Horoscope** - 7-day astrological outlook\n\n**Perfect for:**\n- 📱 Weekly planning and scheduling apps\n- 📰 Weekly horoscope columns and newsletters\n- 🌐 Weekly website content updates\n- 📊 Medium-term trend analysis\n\n**Key Features:**\n- 📆 **Week-long analysis** - Major themes and key.",
+        "operationId": "getWeeklyHoroscope",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "additionalProperties": true,
+                "type": "object",
+                "title": "Request"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Weekly horoscope with transit events and life area predictions",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid horoscope parameters"
+          },
+          "422": {
+            "description": "Validation error - check request format"
+          },
+          "501": {
+            "description": "Feature not yet implemented"
+          }
+        },
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ]
+      }
+    },
+    "/api/v3/horoscope/sign/monthly": {
+      "post": {
+        "summary": "Get Monthly Sun Sign Horoscope",
+        "description": "🌙 **Monthly Sun-Sign Horoscope** - Complete lunar cycle analysis\n\n**Perfect for:**\n- 📅 Monthly planning and goal setting\n- 📰 Monthly magazine and newsletter content\n- 🌐 Monthly website features\n- 🎯 Long-term trend forecasting\n\n**Key Features:**\n- 🌙 **Full lunar cycle** - New Moon to New Moon.",
+        "operationId": "getMonthlyHoroscope",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "additionalProperties": true,
+                "type": "object",
+                "title": "Request"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Monthly horoscope with lunar cycle analysis and key periods",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid horoscope parameters"
+          },
+          "422": {
+            "description": "Validation error - check request format"
+          },
+          "501": {
+            "description": "Feature not yet implemented"
+          }
+        },
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ]
+      }
+    },
+    "/api/v3/horoscope/personal/daily": {
+      "post": {
+        "summary": "Get Personalized Daily Horoscope",
+        "description": "🎯 **Personalized Daily Horoscope** - Complete birth chart analysis\n\n**Perfect for:**\n- 🔍 Professional astrology applications requiring precision\n- 👤 Personalized user experiences with exact birth data\n- 📊 Advanced astrological analysis with transits\n- 🎨 Premium horoscope services with deep.",
+        "operationId": "getPersonalDailyHoroscope",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PersonalizedHoroscopeRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Personalized daily horoscope based on complete birth chart analysis",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid horoscope parameters"
+          },
+          "422": {
+            "description": "Validation error - check request format"
+          },
+          "501": {
+            "description": "Feature not yet implemented"
+          }
+        },
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ]
+      }
+    },
+    "/api/v3/analysis/natal-report": {
+      "post": {
+        "summary": "Get Natal Report",
+        "description": "📖 **Comprehensive Natal Chart Report** - Detailed personality analysis\n\n**Perfect for:**\n- 🎯 Professional astrological consultations\n- 📚 In-depth personality understanding\n- 🎓 Learning astrology through examples\n- 📱 Astrology apps with detailed reports\n\n**What you get:**\n- **Planets in Signs** -.",
+        "operationId": "getNatalReport",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/app__api__v3__schemas__requests__NatalReportRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful natal report generation with comprehensive interpretations",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/app__api__v3__schemas__responses__NatalReportResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid analysis parameters"
+          },
+          "422": {
+            "description": "Validation error - check report options"
+          }
+        },
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ]
+      }
+    },
+    "/api/v3/analysis/compatibility-score": {
+      "post": {
+        "summary": "Get Compatibility Score",
+        "description": "💯 **Compatibility Score Calculator** - Quick numerical compatibility assessment\n\n**Perfect for:**\n- 💕 Dating apps and quick compatibility checks\n- 📊 Relationship scoring systems\n- 🎯 Business partnership assessment\n- 📱 Simple compatibility widgets\n\n**What you get:**\n- **Overall compatibility score**.",
+        "operationId": "getCompatibilityScore",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SynastryChartRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful compatibility score calculation with detailed breakdown",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RelationshipScoreResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid analysis parameters"
+          },
+          "422": {
+            "description": "Validation error - check report options"
+          }
+        },
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ]
+      }
+    },
+    "/api/v3/analysis/transit-report": {
+      "post": {
+        "summary": "Get Transit Report",
+        "description": "🌟 **Transit Report** - Comprehensive transit analysis with timing predictions\n\n**Perfect for:**\n- 📅 Personal timing and planning\n- 🎯 Decision-making guidance\n- 📈 Life cycle understanding\n- 🔄 Transition navigation\n\n**What you get:**\n- **Active Transits** during the specified period\n- **Timing.",
+        "operationId": "getTransitReport",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NatalTransitRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful transit report generation with timing predictions",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NatalTransitReportResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid analysis parameters"
+          },
+          "422": {
+            "description": "Validation error - check report options"
+          }
+        },
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ]
+      }
+    },
+    "/api/v3/analysis/career": {
+      "post": {
+        "summary": "Get Career Analysis",
+        "description": "💼 **Career & Vocational Analysis** - Professional guidance and timing insights\n\n**Perfect for:**\n- 🎯 Career counseling and guidance\n- 📈 Professional development planning\n- 🔄 Career transition timing\n- 💡 Entrepreneurship and business ventures\n\n**What you get:**\n- **Career Strengths** based on.",
+        "operationId": "getCareerAnalysis",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/app__api__v3__schemas__requests__NatalReportRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful career analysis with vocational guidance and timing",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/app__api__v3__schemas__responses__NatalReportResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid analysis parameters"
+          },
+          "422": {
+            "description": "Request validation failed",
+            "content": {
+              "application/json": {}
+            }
+          }
+        },
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ]
+      }
+    },
+    "/api/v3/analysis/psychological": {
+      "post": {
+        "summary": "Get Psychological Analysis",
+        "description": "🧠 **Psychological Analysis** - Deep psychological astrology insights\n\n**Perfect for:**\n- 🎭 Therapy and psychological counseling\n- 🔍 Self-discovery and personal growth\n- 🧘 Spiritual and psychological development\n- 📚 Jungian and depth psychology applications\n\n**What you get:**\n- **Psychological.",
+        "operationId": "getPsychologicalProfile",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/app__api__v3__schemas__requests__NatalReportRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful psychological analysis with depth psychology insights",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/app__api__v3__schemas__responses__NatalReportResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid analysis parameters"
+          },
+          "422": {
+            "description": "Request validation failed",
+            "content": {
+              "application/json": {}
+            }
+          }
+        },
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ]
+      }
+    },
+    "/api/v3/svg/natal": {
+      "post": {
+        "summary": "Get Natal Chart Svg",
+        "description": "⚠️ **DEPRECATED** - Use `POST /api/v3/render/natal` instead.\n\nThe new endpoint supports multiple formats (SVG, PNG, JPG, WebP, PDF) via `render_options.format`.\nThis endpoint will be removed in v4.0.\n\n---\n\n🎨 **Natal Chart SVG Generator** - Beautiful visual birth chart\n\n**Perfect for:**\n- 🖼️ Website.",
+        "operationId": "renderNatalChartSVG",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NatalChartSVGRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "image/svg+xml": {}
+            }
+          },
+          "400": {
+            "description": "Invalid SVG generation parameters"
+          },
+          "422": {
+            "description": "Validation error - check chart options"
+          }
+        },
+        "deprecated": true,
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ]
+      }
+    },
+    "/api/v3/svg/synastry": {
+      "post": {
+        "summary": "Get Synastry Chart Svg",
+        "description": "⚠️ **DEPRECATED** - Use `POST /api/v3/render/synastry` instead.\n\nThe new endpoint supports multiple formats (SVG, PNG, JPG, WebP, PDF) via `render_options.format`.\nThis endpoint will be removed in v4.0.\n\n---\n\n💕 **Synastry Chart SVG Generator** - Beautiful relationship compatibility.",
+        "operationId": "renderSynastryChartSVG",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SynastryChartSVGRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "image/svg+xml": {}
+            }
+          },
+          "400": {
+            "description": "Invalid SVG generation parameters"
+          },
+          "422": {
+            "description": "Validation error - check chart options"
+          }
+        },
+        "deprecated": true,
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ]
+      }
+    },
+    "/api/v3/svg/transit": {
+      "post": {
+        "summary": "Get Transit Chart Svg",
+        "description": "⚠️ **DEPRECATED** - Use `POST /api/v3/render/transit` instead.\n\nThe new endpoint supports multiple formats (SVG, PNG, JPG, WebP, PDF) via `render_options.format`.\nThis endpoint will be removed in v4.0.\n\n---\n\n🔄 **Transit Chart SVG Generator** - Current planetary influences visualization\n\n**Perfect.",
+        "operationId": "renderTransitChartSVG",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TransitChartSVGRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "image/svg+xml": {}
+            }
+          },
+          "400": {
+            "description": "Invalid SVG generation parameters"
+          },
+          "422": {
+            "description": "Validation error - check chart options"
+          }
+        },
+        "deprecated": true,
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ]
+      }
+    },
+    "/api/v3/tarot/cards/draw": {
+      "post": {
+        "summary": "Draw Cards",
+        "description": "**Draw Random Cards** - Draw cards for spreads or practice\n\n**Perfect for:**\n- Daily card draws\n- Spread preparation\n- Random selection\n- Learning and practice\n\n**Options:**\n- `count` - Number of cards (1-78)\n- `exclude_reversed` - Only upright cards\n- `life_area` - Focus on specific life area\n-.",
+        "operationId": "drawTarotCards",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DrawCardsRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Randomly drawn tarot cards with orientations",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid tarot parameters"
+          },
+          "422": {
+            "description": "Validation error - check request format"
+          }
+        },
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ]
+      }
+    },
+    "/api/v3/tarot/cards/daily": {
+      "get": {
+        "summary": "Get Daily Card",
+        "description": "**Daily Card Reading** - Your personal card guidance for the day\n\n**Perfect for:**\n- Daily spiritual guidance and insight\n- Morning meditation and intention setting\n- Mobile app integration with consistent user experience\n- Building daily tarot practice routines\n\n**How it works:**\n- Uses user_id +.",
+        "operationId": "getDailyTarotCard",
+        "parameters": [
+          {
+            "name": "user_id",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "description": "Unique user identifier for consistent daily cards",
+              "title": "User Id"
+            },
+            "description": "Unique user identifier for consistent daily cards"
+          },
+          {
+            "name": "life_area",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Optional life area focus",
+              "title": "Life Area"
+            },
+            "description": "Optional life area focus"
+          },
+          {
+            "name": "birth_year",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Birth year for personalization",
+              "title": "Birth Year"
+            },
+            "description": "Birth year for personalization"
+          },
+          {
+            "name": "birth_month",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Birth month for personalization",
+              "title": "Birth Month"
+            },
+            "description": "Birth month for personalization"
+          },
+          {
+            "name": "birth_day",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Birth day for personalization",
+              "title": "Birth Day"
+            },
+            "description": "Birth day for personalization"
+          },
+          {
+            "name": "birth_hour",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Birth hour for personalization",
+              "title": "Birth Hour"
+            },
+            "description": "Birth hour for personalization"
+          },
+          {
+            "name": "birth_minute",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Birth minute for personalization",
+              "title": "Birth Minute"
+            },
+            "description": "Birth minute for personalization"
+          },
+          {
+            "name": "city",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Birth city for personalization",
+              "title": "City"
+            },
+            "description": "Birth city for personalization"
+          },
+          {
+            "name": "country_code",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Country code for personalization",
+              "title": "Country Code"
+            },
+            "description": "Country code for personalization"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Daily tarot card with personalized interpretation",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid tarot parameters"
+          },
+          "422": {
+            "description": "Validation error - check request format"
+          }
+        },
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ]
+      }
+    },
+    "/api/v3/tarot/reports/three-card": {
+      "post": {
+        "summary": "Generate Three Card Report",
+        "description": "**Three Card Report** - Classic spread for comprehensive analysis\n\n**Perfect for:**\n- Timeline analysis (Past/Present/Future)\n- Situation assessment\n- Decision making\n- Quick but thorough reading\n\n**Layouts available:**\n- Past-Present-Future\n- Situation-Challenge-Advice\n- Mind-Body-Spirit\n- Custom.",
+        "operationId": "getThreeCardSpread",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TarotReportRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Three-card tarot reading with detailed interpretations",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TarotReportResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid tarot parameters"
+          },
+          "422": {
+            "description": "Validation Error - Invalid spread type or missing required parameters",
+            "content": {
+              "application/json": {}
+            }
+          }
+        },
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ]
+      }
+    },
+    "/api/v3/numerology/core-numbers": {
+      "post": {
+        "summary": "Get Core Numbers",
+        "description": "🔢 **Calculate Core Numerology Numbers** - Essential life numbers from name and birth date\n\n**Perfect for:**\n- 🎯 Personal development and self-awareness\n- 📊 Life coaching and guidance sessions\n- 🎓 Numerology education and learning\n- 📱 Personality apps and websites\n- 🔮 Spiritual and metaphysical.",
+        "operationId": "getNumerologyCoreNumbers",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SingleSubjectRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful numerology core numbers calculation with detailed analysis",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid numerology parameters"
+          },
+          "422": {
+            "description": "Validation error - check request format"
+          }
+        },
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ]
+      }
+    },
+    "/api/v3/numerology/comprehensive": {
+      "post": {
+        "summary": "Get Comprehensive Reading",
+        "description": "📖 **Comprehensive Numerology Reading** - Complete life analysis with insights and guidance\n\n**Perfect for:**\n- 🌟 Professional numerology consultations and readings\n- 💼 Life coaching sessions with detailed numerological insights\n- 🎯 Personal development planning and goal setting\n- 📚 Educational.",
+        "operationId": "getComprehensiveNumerology",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SingleSubjectRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful comprehensive numerology reading with detailed insights and guidance",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid numerology parameters"
+          },
+          "422": {
+            "description": "Validation error in request data",
+            "content": {
+              "application/json": {}
+            }
+          }
+        },
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ]
+      }
+    },
+    "/api/v3/lunar/void-of-course": {
+      "post": {
+        "summary": "Get Void Of Course Status",
+        "description": "🌙 **Void-of-Course Moon Tracking** - Precise aspect-based calculations for optimal timing\n\n**Perfect for:**\n- 🎯 **Electional Astrology** - Avoid VOC periods for important decisions\n- ⏰ **Timing Decisions** - Know when lunar energy is most/least supportive\n- 🔮 **Traditional Astrology** - Classical.",
+        "operationId": "getVoidOfCourse",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/VoidOfCourseRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Void-of-course Moon tracking with precise timing",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid lunar calculation parameters"
+          },
+          "422": {
+            "description": "Validation error - check request format"
+          },
+          "500": {
+            "description": "Swiss Ephemeris calculation error"
+          }
+        },
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ]
+      }
+    },
+    "/api/v3/lunar/phases": {
+      "post": {
+        "summary": "Get Precise Lunar Phases",
+        "description": "🌙 **Precise Lunar Phases** - Swiss Ephemeris accuracy with minute-level timing\n\n**Perfect for:**\n- 🎯 **Electional Astrology** - Exact phase timing for optimal decisions\n- 📅 **Lunar Calendar Planning** - Complete phase schedules and timing\n- 🔮 **Manifestation Work** - Precise energy timing for.",
+        "operationId": "getLunarPhases",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LunarPhasesRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Precise lunar phases with Swiss Ephemeris accuracy",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid lunar calculation parameters"
+          },
+          "422": {
+            "description": "Validation error - check request format"
+          },
+          "500": {
+            "description": "Swiss Ephemeris calculation error"
+          }
+        },
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ]
+      }
+    },
+    "/api/v3/glossary/house-systems": {
+      "get": {
+        "summary": "Get House Systems",
+        "description": "Returns a dictionary of available house systems.",
+        "operationId": "getHouseSystems",
+        "responses": {
+          "200": {
+            "description": "Complete list of available astrological house systems with descriptions",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "404": {
+            "description": "Glossary item not found"
+          },
+          "500": {
+            "description": "Internal server error loading glossary"
+          }
+        },
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ]
+      }
+    },
+    "/api/v3/glossary/cities": {
+      "get": {
+        "summary": "Get Cities",
+        "description": "🌍 **City Database Search** - Find cities for astrological calculations\n\n**Perfect for:**\n- 🔍 Location autocompletion in astrology apps\n- 🌎 Browsing cities by country for chart calculations\n- 📍 Finding exact city names and country codes\n- 🎯 Location validation for birth data\n\n**Search Examples:**\n-.",
+        "operationId": "searchCities",
+        "parameters": [
+          {
+            "name": "search",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "description": "Case-insensitive search string to filter cities by name (matches from the start).",
+              "title": "Search"
+            },
+            "description": "Case-insensitive search string to filter cities by name (matches from the start)."
+          },
+          {
+            "name": "country_code",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "description": "Filter cities by country using ISO 3166-1 alpha-2 code.",
+              "title": "Country Code"
+            },
+            "description": "Filter cities by country using ISO 3166-1 alpha-2 code."
+          },
+          {
+            "name": "sort_by",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "description": "Field to sort by.",
+              "enum": [
+                "population",
+                "name"
+              ],
+              "default": "population",
+              "title": "Sort By"
+            },
+            "description": "Field to sort by."
+          },
+          {
+            "name": "sort_order",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "description": "Sort order.",
+              "enum": [
+                "asc",
+                "desc"
+              ],
+              "default": "desc",
+              "title": "Sort Order"
+            },
+            "description": "Sort order."
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 1000,
+              "minimum": 1,
+              "description": "Number of items to return.",
+              "default": 100,
+              "title": "Limit"
+            },
+            "description": "Number of items to return."
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "minimum": 0,
+              "description": "Offset for pagination.",
+              "default": 0,
+              "title": "Offset"
+            },
+            "description": "Offset for pagination."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Comprehensive city database with geographic and demographic data",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "404": {
+            "description": "Glossary item not found"
+          },
+          "500": {
+            "description": "Internal server error loading glossary"
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ]
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "BearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "description": "Bearer token from dashboard.astrology-api.io"
+      }
+    },
+    "schemas": {
+      "NatalTransitRequest": {
+        "properties": {
+          "subject": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/app__api__v3__schemas__common__Subject"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Birth data for natal chart calculation."
+          },
+          "transit_time": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/TransitTime"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "🆕 Transit time specification - use 'date_range' for transit event searches."
+          },
+          "natal_subject": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/app__api__v3__schemas__common__Subject"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "⚠️ LEGACY: Use 'subject' instead. Birth data for natal chart calculation.",
+            "deprecated": true
+          },
+          "date_range": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/DateRange"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "⚠️ LEGACY: Use 'transit_time.date_range' instead. Date range for transit search.",
+            "deprecated": true
+          },
+          "orb": {
+            "type": "number",
+            "title": "Orb",
+            "description": "The maximum orb (in degrees) to consider an aspect exact. Defaults to 1.0.",
+            "default": 1.0
+          },
+          "report_options": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ReportOptions"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "type": "object",
+        "title": "NatalTransitRequest",
+        "description": "🆕 Unified natal transit request with backward-compatible legacy field support.\n\n**New format (recommended):**\n- `subject` - Birth data for natal chart\n- `transit_time` - Use `date_range` for transit event searches\n\n**Legacy format (still supported):**\n- `natal_subject` - Alias for `subject`\n- `date_range` - Direct date range (maps to transit_time.date_range)"
+      },
+      "VoidOfCourseRequest": {
+        "properties": {
+          "datetime_location": {
+            "$ref": "#/components/schemas/DateTimeLocation",
+            "description": "Date, time, and location for calculation"
+          },
+          "days_ahead": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "maximum": 90.0,
+                "minimum": 1.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Days Ahead",
+            "description": "Number of days to look ahead for VOC periods",
+            "default": 30
+          },
+          "use_modern_planets": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Use Modern Planets",
+            "description": "Include outer planets (Uranus, Neptune, Pluto)",
+            "default": false
+          }
+        },
+        "type": "object",
+        "required": [
+          "datetime_location"
+        ],
+        "title": "VoidOfCourseRequest",
+        "description": "Request for void-of-course calculation"
+      },
+      "Subject-Output": {
+        "properties": {
+          "name": {
+            "type": "string",
+            "title": "Name",
+            "description": "Name of the person or event. NOT required - you can use anonymous data like 'Person A', 'Client', or any placeholder. Only used for report titles and aspect descriptions. ⚠️ We NEVER store or log names - all data is processed in memory only.",
+            "default": "Subject"
+          },
+          "birth_data": {
+            "$ref": "#/components/schemas/DateTimeLocation",
+            "description": "The date, time, and location data for this subject."
+          }
+        },
+        "type": "object",
+        "required": [
+          "birth_data"
+        ],
+        "title": "Subject"
+      },
+      "PersonalizedHoroscopeRequest": {
+        "properties": {
+          "subject": {
+            "$ref": "#/components/schemas/app__api__v3__schemas__common__Subject",
+            "description": "Subject birth data"
+          },
+          "target_date": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Target Date",
+            "description": "Target date for prediction"
+          },
+          "horoscope_type": {
+            "type": "string",
+            "enum": [
+              "daily",
+              "weekly",
+              "monthly",
+              "yearly"
+            ],
+            "title": "Horoscope Type",
+            "description": "Timeframe",
+            "default": "daily"
+          },
+          "language": {
+            "type": "string",
+            "enum": [
+              "en",
+              "fr",
+              "pt",
+              "it",
+              "zh",
+              "es",
+              "ru",
+              "tr",
+              "de",
+              "hi",
+              "uk",
+              "ar",
+              "ko",
+              "nl",
+              "pl",
+              "ja",
+              "en-US",
+              "en-GB",
+              "en-ARCHAIC",
+              "pt-BR",
+              "pt-PT",
+              "es-MX",
+              "es-ES",
+              "fr-FR",
+              "fr-CA",
+              "zh-CN",
+              "zh-TW"
+            ],
+            "title": "Language",
+            "description": "Response language",
+            "default": "en"
+          },
+          "tradition": {
+            "type": "string",
+            "enum": [
+              "universal",
+              "psychological",
+              "event_oriented",
+              "classical"
+            ],
+            "title": "Tradition",
+            "description": "Astrological tradition",
+            "default": "universal"
+          },
+          "options": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/HoroscopeOptions"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Alternative location for language/tradition settings"
+          },
+          "include_transits": {
+            "type": "boolean",
+            "title": "Include Transits",
+            "default": true
+          },
+          "include_progressions": {
+            "type": "boolean",
+            "title": "Include Progressions",
+            "default": false
+          },
+          "include_major_transits": {
+            "type": "boolean",
+            "title": "Include Major Transits",
+            "description": "🆕 Include major outer planet transits (Jupiter, Saturn, Uranus through signs/houses). For yearly only.",
+            "default": true
+          },
+          "include_retrograde_periods": {
+            "type": "boolean",
+            "title": "Include Retrograde Periods",
+            "description": "🆕 Include full retrograde calendar for the year. For yearly only.",
+            "default": true
+          },
+          "include_power_periods": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/PowerPeriodsConfig"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "🆕 Include best dates for various activities. Set to config object to enable. For yearly only."
+          }
+        },
+        "type": "object",
+        "required": [
+          "subject"
+        ],
+        "title": "PersonalizedHoroscopeRequest"
+      },
+      "SingleSubjectRequest": {
+        "properties": {
+          "subject": {
+            "$ref": "#/components/schemas/app__api__v3__schemas__standard__Subject",
+            "description": "Subject for calculation"
+          },
+          "options": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/StandardOptions"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Request options"
+          }
+        },
+        "type": "object",
+        "required": [
+          "subject"
+        ],
+        "title": "SingleSubjectRequest",
+        "description": "Base request model for endpoints requiring one subject",
+        "example": {
+          "options": {
+            "house_system": "P",
+            "language": "en"
+          },
+          "subject": {
+            "birth_data": {
+              "city": "London",
+              "country_code": "GB",
+              "day": 11,
+              "hour": 18,
+              "minute": 15,
+              "month": 5,
+              "year": 1985
+            },
+            "name": "John Doe"
+          }
+        }
+      },
+      "NatalTransitReportResponse": {
+        "properties": {
+          "events": {
+            "items": {
+              "$ref": "#/components/schemas/InterpretedTransitEvent"
+            },
+            "type": "array",
+            "title": "Events",
+            "description": "A list of exact transit events with their interpretations."
+          }
+        },
+        "type": "object",
+        "required": [
+          "events"
+        ],
+        "title": "NatalTransitReportResponse",
+        "description": "The response for a natal transit report."
+      },
+      "LunarPhasesRequest": {
+        "properties": {
+          "datetime_location": {
+            "$ref": "#/components/schemas/DateTimeLocation",
+            "description": "Date, time, and location for calculation"
+          },
+          "days_ahead": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "maximum": 365.0,
+                "minimum": 1.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Days Ahead",
+            "description": "Number of days to calculate phases ahead",
+            "default": 30
+          }
+        },
+        "type": "object",
+        "required": [
+          "datetime_location"
+        ],
+        "title": "LunarPhasesRequest",
+        "description": "Request for precise lunar phases calculation"
+      },
+      "DataRequest": {
+        "properties": {
+          "subject": {
+            "$ref": "#/components/schemas/app__api__v3__schemas__standard__Subject",
+            "description": "Subject for calculation"
+          },
+          "options": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/DataOptions"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Data calculation options"
+          },
+          "filter_retrograde_only": {
+            "type": "boolean",
+            "title": "Filter Retrograde Only",
+            "description": "🆕 When true, returns only planets currently in retrograde motion. Useful for tracking retrograde periods.",
+            "default": false
+          }
+        },
+        "type": "object",
+        "required": [
+          "subject"
+        ],
+        "title": "DataRequest",
+        "description": "Standard data request model that extends SingleSubjectRequest with data-specific options",
+        "example": {
+          "options": {
+            "house_system": "P",
+            "language": "en"
+          },
+          "subject": {
+            "birth_data": {
+              "city": "London",
+              "country_code": "GB",
+              "day": 11,
+              "hour": 18,
+              "minute": 15,
+              "month": 5,
+              "year": 1985
+            },
+            "name": "John Doe"
+          }
+        }
+      },
+      "TarotReportResponse": {
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "title": "Success",
+            "description": "Request success status"
+          },
+          "report_id": {
+            "type": "string",
+            "title": "Report Id",
+            "description": "Unique report identifier"
+          },
+          "timestamp": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Timestamp",
+            "description": "Generation timestamp"
+          },
+          "spread": {
+            "$ref": "#/components/schemas/SpreadInfo",
+            "description": "Spread information"
+          },
+          "cards": {
+            "items": {
+              "$ref": "#/components/schemas/CardPosition"
+            },
+            "type": "array",
+            "title": "Cards",
+            "description": "Cards in positions"
+          },
+          "report": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Report",
+            "description": "Report content"
+          },
+          "timing_guidance": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Timing Guidance",
+            "description": "Timing predictions"
+          },
+          "astrological_context": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Astrological Context",
+            "description": "Astro context"
+          },
+          "elemental_dignities": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Elemental Dignities",
+            "description": "Dignity analysis"
+          },
+          "synthesis": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Synthesis",
+            "description": "Overall synthesis"
+          },
+          "suggestions": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Suggestions",
+            "description": "Action suggestions"
+          },
+          "metadata": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Metadata",
+            "description": "Additional metadata"
+          }
+        },
+        "type": "object",
+        "required": [
+          "success",
+          "report_id",
+          "timestamp",
+          "spread",
+          "cards",
+          "report"
+        ],
+        "title": "TarotReportResponse",
+        "description": "Response for tarot report"
+      },
+      "HTTPValidationError": {
+        "properties": {
+          "detail": {
+            "items": {
+              "$ref": "#/components/schemas/ValidationError"
+            },
+            "type": "array",
+            "title": "Detail"
+          }
+        },
+        "type": "object",
+        "title": "HTTPValidationError"
+      },
+      "DrawCardsRequest": {
+        "properties": {
+          "count": {
+            "type": "integer",
+            "maximum": 78.0,
+            "minimum": 1.0,
+            "title": "Count",
+            "description": "Number of cards to draw",
+            "default": 1
+          },
+          "exclude_reversed": {
+            "type": "boolean",
+            "title": "Exclude Reversed",
+            "description": "Exclude reversed orientations",
+            "default": false
+          },
+          "life_area": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Life Area",
+            "description": "Filter by life area relevance"
+          },
+          "exclude_majors": {
+            "type": "boolean",
+            "title": "Exclude Majors",
+            "description": "Exclude Major Arcana",
+            "default": false
+          },
+          "exclude_minors": {
+            "type": "boolean",
+            "title": "Exclude Minors",
+            "description": "Exclude Minor Arcana",
+            "default": false
+          }
+        },
+        "type": "object",
+        "title": "DrawCardsRequest",
+        "description": "Request for drawing random cards"
+      },
+      "CompositeChartRequest": {
+        "properties": {
+          "subject1": {
+            "$ref": "#/components/schemas/app__api__v3__schemas__common__Subject",
+            "description": "First person's birth data for composite chart calculation."
+          },
+          "subject2": {
+            "$ref": "#/components/schemas/app__api__v3__schemas__common__Subject",
+            "description": "Second person's birth data for composite chart calculation."
+          },
+          "options": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ChartOptions"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Chart calculation options including house system, zodiac type, active points, and precision."
+          }
+        },
+        "type": "object",
+        "required": [
+          "subject1",
+          "subject2"
+        ],
+        "title": "CompositeChartRequest"
+      },
+      "NatalChartRequest": {
+        "properties": {
+          "subject": {
+            "$ref": "#/components/schemas/app__api__v3__schemas__common__Subject"
+          },
+          "options": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ChartOptions"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "type": "object",
+        "required": [
+          "subject"
+        ],
+        "title": "NatalChartRequest"
+      },
+      "SynastryChartResponse": {
+        "properties": {
+          "subject_data": {
+            "$ref": "#/components/schemas/SynastryData"
+          },
+          "chart_data": {
+            "$ref": "#/components/schemas/ChartData",
+            "description": "Chart data representing the aspects BETWEEN the two subjects."
+          }
+        },
+        "type": "object",
+        "required": [
+          "subject_data",
+          "chart_data"
+        ],
+        "title": "SynastryChartResponse"
+      },
+      "TransitChartSVGRequest": {
+        "properties": {
+          "subject": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/app__api__v3__schemas__common__Subject"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Birth data for natal chart calculation. Use this instead of 'natal_subject'."
+          },
+          "transit_time": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/TransitTime"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "🆕 Transit time specification - use 'datetime' for specific moment or 'date_range' for period analysis."
+          },
+          "natal_subject": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/app__api__v3__schemas__common__Subject"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "⚠️ LEGACY: Use 'subject' instead. Birth data for natal chart calculation.",
+            "deprecated": true
+          },
+          "transit_datetime": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/DateTimeLocation"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "⚠️ LEGACY: Use 'transit_time.datetime' instead. Specific datetime for transit calculation.",
+            "deprecated": true
+          },
+          "options": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ChartOptions"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "svg_options": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/SVGOptions"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "type": "object",
+        "title": "TransitChartSVGRequest"
+      },
+      "SynastryChartRequest": {
+        "properties": {
+          "subject1": {
+            "$ref": "#/components/schemas/app__api__v3__schemas__common__Subject"
+          },
+          "subject2": {
+            "$ref": "#/components/schemas/app__api__v3__schemas__common__Subject"
+          },
+          "options": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ChartOptions"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "type": "object",
+        "required": [
+          "subject1",
+          "subject2"
+        ],
+        "title": "SynastryChartRequest"
+      },
+      "CompositeChartResponse": {
+        "properties": {
+          "subject_data": {
+            "$ref": "#/components/schemas/CompositeData",
+            "description": "Data for both subjects and the resulting composite chart."
+          },
+          "chart_data": {
+            "$ref": "#/components/schemas/ChartData",
+            "description": "Chart data for the composite chart including planetary positions, house cusps, and aspects."
+          }
+        },
+        "type": "object",
+        "required": [
+          "subject_data",
+          "chart_data"
+        ],
+        "title": "CompositeChartResponse"
+      },
+      "TarotReportRequest": {
+        "properties": {
+          "spread_type": {
+            "type": "string",
+            "enum": [
+              "single",
+              "three_card",
+              "celtic_cross",
+              "zodiac_wheel",
+              "synastry",
+              "houses",
+              "custom"
+            ],
+            "title": "Spread Type",
+            "description": "Type of tarot spread",
+            "default": "three_card"
+          },
+          "life_area": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Life Area",
+            "description": "Life area focus (from app/data/life_areas.py)"
+          },
+          "birth_data": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/DateTimeLocation"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Birth data for astrological integration"
+          },
+          "partner_birth_data": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/DateTimeLocation"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Partner data for synastry reports"
+          },
+          "use_reversals": {
+            "type": "boolean",
+            "title": "Use Reversals",
+            "description": "Include reversed card meanings",
+            "default": true
+          },
+          "tradition": {
+            "type": "string",
+            "enum": [
+              "universal",
+              "psychological",
+              "classical",
+              "hermetic"
+            ],
+            "title": "Tradition",
+            "description": "Interpretation tradition",
+            "default": "universal"
+          },
+          "include_dignities": {
+            "type": "boolean",
+            "title": "Include Dignities",
+            "description": "Calculate elemental dignities",
+            "default": false
+          },
+          "include_timing": {
+            "type": "boolean",
+            "title": "Include Timing",
+            "description": "Include timing predictions",
+            "default": false
+          },
+          "include_astro_context": {
+            "type": "boolean",
+            "title": "Include Astro Context",
+            "description": "Include astrological context",
+            "default": false
+          },
+          "include_birth_cards": {
+            "type": "boolean",
+            "title": "Include Birth Cards",
+            "description": "Include birth card compatibility analysis",
+            "default": false
+          },
+          "interpretation_depth": {
+            "type": "string",
+            "enum": [
+              "keywords",
+              "basic",
+              "detailed",
+              "professional"
+            ],
+            "title": "Interpretation Depth",
+            "description": "Depth of interpretation",
+            "default": "basic"
+          },
+          "language": {
+            "type": "string",
+            "title": "Language",
+            "description": "Language code",
+            "default": "en"
+          }
+        },
+        "type": "object",
+        "title": "TarotReportRequest",
+        "description": "Request for tarot report generation"
+      },
+      "SolarReturnChartResponse": {
+        "properties": {
+          "subject_data": {
+            "title": "Subject Data"
+          },
+          "chart_data": {
+            "$ref": "#/components/schemas/ChartData"
+          }
+        },
+        "type": "object",
+        "required": [
+          "subject_data",
+          "chart_data"
+        ],
+        "title": "SolarReturnChartResponse"
+      },
+      "ProgressionRequest": {
+        "properties": {
+          "subject": {
+            "$ref": "#/components/schemas/app__api__v3__schemas__common__Subject"
+          },
+          "target_date": {
+            "type": "string",
+            "format": "date",
+            "title": "Target Date",
+            "description": "The date for which to calculate progressions."
+          },
+          "progression_type": {
+            "type": "string",
+            "enum": [
+              "secondary",
+              "primary",
+              "tertiary",
+              "minor"
+            ],
+            "title": "Progression Type",
+            "description": "Type of progression calculation.",
+            "default": "secondary"
+          },
+          "location": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/DateTimeLocation"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Current location for relocated progressions. If not provided, birth location is used."
+          },
+          "options": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ChartOptions"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "type": "object",
+        "required": [
+          "subject",
+          "target_date"
+        ],
+        "title": "ProgressionRequest"
+      },
+      "app__api__v3__schemas__responses__NatalReportResponse": {
+        "properties": {
+          "subject": {
+            "$ref": "#/components/schemas/Subject-Output",
+            "description": "The subject whose report this is."
+          },
+          "interpretations": {
+            "items": {
+              "$ref": "#/components/schemas/Interpretation"
+            },
+            "type": "array",
+            "title": "Interpretations",
+            "description": "A list of interpretations for the chart."
+          }
+        },
+        "type": "object",
+        "required": [
+          "subject",
+          "interpretations"
+        ],
+        "title": "NatalReportResponse",
+        "description": "The response for a natal chart report."
+      },
+      "NatalChartSVGRequest": {
+        "properties": {
+          "subject": {
+            "$ref": "#/components/schemas/app__api__v3__schemas__common__Subject"
+          },
+          "options": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ChartOptions"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "svg_options": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/SVGOptions"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "type": "object",
+        "required": [
+          "subject"
+        ],
+        "title": "NatalChartSVGRequest"
+      },
+      "TransitChartRequest": {
+        "properties": {
+          "subject": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/app__api__v3__schemas__common__Subject"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Birth data for natal chart calculation. Use this instead of 'natal_subject'."
+          },
+          "transit_time": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/TransitTime"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "🆕 Transit time specification - use 'datetime' for specific moment or 'date_range' for period analysis."
+          },
+          "natal_subject": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/app__api__v3__schemas__common__Subject"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "⚠️ LEGACY: Use 'subject' instead. Birth data for natal chart calculation.",
+            "deprecated": true
+          },
+          "transit_datetime": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/DateTimeLocation"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "⚠️ LEGACY: Use 'transit_time.datetime' instead. Specific datetime for transit calculation.",
+            "deprecated": true
+          },
+          "options": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ChartOptions"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "type": "object",
+        "title": "TransitChartRequest",
+        "description": "🆕 Unified transit chart request with backward-compatible legacy field support.\n\n**New format (recommended):**\n- `subject` - Birth data for natal chart\n- `transit_time` - Either specific datetime OR date range\n\n**Legacy format (still supported):**\n- `natal_subject` - Alias for `subject`\n- `transit_datetime` - Specific datetime (maps to transit_time.datetime)"
+      },
+      "ProgressionChartResponse": {
+        "properties": {
+          "subject_data": {
+            "title": "Subject Data",
+            "description": "Data of the natal chart subject."
+          },
+          "progressed_data": {
+            "title": "Progressed Data",
+            "description": "Data of the progressed chart."
+          },
+          "chart_data": {
+            "$ref": "#/components/schemas/ChartData",
+            "description": "Chart data for the progressed positions."
+          },
+          "progression_type": {
+            "type": "string",
+            "title": "Progression Type",
+            "description": "Type of progression used."
+          },
+          "target_date": {
+            "type": "string",
+            "title": "Target Date",
+            "description": "Target date for the progression."
+          }
+        },
+        "type": "object",
+        "required": [
+          "subject_data",
+          "progressed_data",
+          "chart_data",
+          "progression_type",
+          "target_date"
+        ],
+        "title": "ProgressionChartResponse",
+        "description": "The response for a progression chart calculation."
+      },
+      "TransitChartResponse": {
+        "properties": {
+          "subject_data": {
+            "$ref": "#/components/schemas/TransitData"
+          },
+          "chart_data": {
+            "$ref": "#/components/schemas/ChartData",
+            "description": "Chart data representing the aspects between the natal subject and the transiting points."
+          }
+        },
+        "type": "object",
+        "required": [
+          "subject_data",
+          "chart_data"
+        ],
+        "title": "TransitChartResponse"
+      },
+      "SunSignDailyRequest": {
+        "properties": {
+          "sign": {
+            "type": "string",
+            "title": "Sign",
+            "description": "Zodiac sign name or abbreviation"
+          },
+          "language": {
+            "type": "string",
+            "enum": [
+              "en",
+              "fr",
+              "pt",
+              "it",
+              "zh",
+              "es",
+              "ru",
+              "tr",
+              "de",
+              "hi",
+              "uk",
+              "ar",
+              "ko",
+              "nl",
+              "pl",
+              "ja",
+              "en-US",
+              "en-GB",
+              "en-ARCHAIC",
+              "pt-BR",
+              "pt-PT",
+              "es-MX",
+              "es-ES",
+              "fr-FR",
+              "fr-CA",
+              "zh-CN",
+              "zh-TW"
+            ],
+            "title": "Language",
+            "description": "Response language",
+            "default": "en"
+          },
+          "tradition": {
+            "type": "string",
+            "enum": [
+              "universal",
+              "psychological",
+              "event_oriented",
+              "classical"
+            ],
+            "title": "Tradition",
+            "description": "Astrological tradition to use",
+            "default": "universal"
+          },
+          "minimum_strength": {
+            "type": "number",
+            "maximum": 5.0,
+            "minimum": 0.0,
+            "title": "Minimum Strength",
+            "description": "Minimum aspect strength included in responses",
+            "default": 0.0
+          },
+          "date": {
+            "type": "string",
+            "format": "date",
+            "title": "Date",
+            "description": "Target date"
+          }
+        },
+        "type": "object",
+        "required": [
+          "sign"
+        ],
+        "title": "SunSignDailyRequest"
+      },
+      "SynastryChartSVGRequest": {
+        "properties": {
+          "subject1": {
+            "$ref": "#/components/schemas/app__api__v3__schemas__common__Subject"
+          },
+          "subject2": {
+            "$ref": "#/components/schemas/app__api__v3__schemas__common__Subject"
+          },
+          "options": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ChartOptions"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "svg_options": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/SVGOptions"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "type": "object",
+        "required": [
+          "subject1",
+          "subject2"
+        ],
+        "title": "SynastryChartSVGRequest"
+      },
+      "SolarReturnRequest": {
+        "properties": {
+          "subject": {
+            "$ref": "#/components/schemas/app__api__v3__schemas__common__Subject"
+          },
+          "return_year": {
+            "type": "integer",
+            "title": "Return Year",
+            "description": "The year for which the solar return is calculated."
+          },
+          "return_location": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/DateTimeLocation"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Location at the moment of the solar return. If not provided, birth location is used."
+          },
+          "options": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ChartOptions"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "type": "object",
+        "required": [
+          "subject",
+          "return_year"
+        ],
+        "title": "SolarReturnRequest"
+      },
+      "RelationshipScoreResponse": {
+        "properties": {
+          "score": {
+            "type": "number",
+            "title": "Score",
+            "description": "The calculated relationship score (Discepolo method - measures significance, not harmony)."
+          },
+          "score_description": {
+            "type": "string",
+            "title": "Score Description",
+            "description": "A textual description of the score's meaning."
+          },
+          "is_destiny_sign": {
+            "type": "boolean",
+            "title": "Is Destiny Sign",
+            "description": "Indicates if the subjects share a destiny sign (same modality)."
+          },
+          "aspects": {
+            "items": {
+              "$ref": "#/components/schemas/Aspect"
+            },
+            "type": "array",
+            "title": "Aspects",
+            "description": "The key aspects that contributed to the score."
+          },
+          "dynamics": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/RelationshipDynamics"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Detailed analysis of relationship harmony vs tension. Helps interpret the score contextually."
+          },
+          "subject_data": {
+            "$ref": "#/components/schemas/SynastryData"
+          }
+        },
+        "type": "object",
+        "required": [
+          "score",
+          "score_description",
+          "is_destiny_sign",
+          "aspects",
+          "subject_data"
+        ],
+        "title": "RelationshipScoreResponse"
+      },
+      "app__api__v3__schemas__requests__NatalReportRequest": {
+        "properties": {
+          "subject": {
+            "$ref": "#/components/schemas/app__api__v3__schemas__common__Subject",
+            "description": "The person or event for whom the report is generated."
+          },
+          "tradition": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Tradition",
+            "description": "⚠️ LEGACY: The astrological tradition to use for the report. Use report_options instead."
+          },
+          "language": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Language",
+            "description": "⚠️ LEGACY: The language for the report interpretations. Use report_options instead."
+          },
+          "report_options": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ReportOptions"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Report generation options including tradition and language (recommended)."
+          },
+          "fixed_stars": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/FixedStarsConfig"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "🌟 Fixed stars configuration for the report."
+          },
+          "include_aspect_patterns": {
+            "type": "boolean",
+            "title": "Include Aspect Patterns",
+            "description": "🆕 Include aspect pattern detection (Grand Trine, T-Square, Yod, Stellium, etc.). Default: false (disabled for mobile).",
+            "default": false
+          }
+        },
+        "type": "object",
+        "required": [
+          "subject"
+        ],
+        "title": "NatalReportRequest"
+      },
+      "NatalChartResponse": {
+        "properties": {
+          "subject_data": {
+            "title": "Subject Data",
+            "description": "Detailed raw data object of the subject from the calculation library."
+          },
+          "chart_data": {
+            "$ref": "#/components/schemas/ChartData"
+          }
+        },
+        "type": "object",
+        "required": [
+          "subject_data",
+          "chart_data"
+        ],
+        "title": "NatalChartResponse"
+      },
+      "CardPosition": {
+        "properties": {
+          "position": {
+            "type": "integer",
+            "title": "Position",
+            "description": "Position in spread (1-based)"
+          },
+          "position_name": {
+            "type": "string",
+            "title": "Position Name",
+            "description": "Name of position"
+          },
+          "card": {
+            "$ref": "#/components/schemas/TarotCard",
+            "description": "Card data"
+          },
+          "orientation": {
+            "type": "string",
+            "enum": [
+              "upright",
+              "reversed"
+            ],
+            "title": "Orientation",
+            "description": "Upright or reversed"
+          },
+          "interpretation": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Interpretation",
+            "description": "Position-specific interpretation"
+          },
+          "dignity": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Dignity",
+            "description": "Elemental dignity modifier"
+          }
+        },
+        "type": "object",
+        "required": [
+          "position",
+          "position_name",
+          "card",
+          "orientation"
+        ],
+        "title": "CardPosition",
+        "description": "Card in a specific spread position"
+      },
+      "TransitData": {
+        "properties": {
+          "natal_subject": {
+            "title": "Natal Subject",
+            "description": "Detailed raw data for the natal subject."
+          },
+          "transit_subject": {
+            "title": "Transit Subject",
+            "description": "Detailed raw data for the transiting moment."
+          }
+        },
+        "type": "object",
+        "required": [
+          "natal_subject",
+          "transit_subject"
+        ],
+        "title": "TransitData"
+      },
+      "FixedStarsConfig": {
+        "properties": {
+          "presets": {
+            "items": {
+              "type": "string",
+              "enum": [
+                "essential",
+                "traditional",
+                "behenian",
+                "extended"
+              ]
+            },
+            "type": "array",
+            "title": "Presets",
+            "description": "Fixed star presets to include. Can combine multiple presets. Empty list = no fixed stars.",
+            "default": []
+          },
+          "custom_orbs": {
+            "anyOf": [
+              {
+                "additionalProperties": {
+                  "type": "number"
+                },
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Custom Orbs",
+            "description": "Custom orb values for aspects (in degrees). Overrides preset defaults."
+          },
+          "include_parans": {
+            "type": "boolean",
+            "title": "Include Parans",
+            "description": "Include parans (stars co-rising, co-culminating, co-setting). Adds ~20-30ms.",
+            "default": false
+          },
+          "include_heliacal": {
+            "type": "boolean",
+            "title": "Include Heliacal",
+            "description": "Include heliacal rising/setting phenomena. Adds ~30-40ms.",
+            "default": false
+          },
+          "include_interpretations": {
+            "type": "boolean",
+            "title": "Include Interpretations",
+            "description": "Include textual interpretations for fixed star aspects.",
+            "default": true
+          }
+        },
+        "type": "object",
+        "title": "FixedStarsConfig",
+        "description": "Configuration for fixed stars calculations across all API endpoints.\nSupports multiple preset combinations for flexible star selection."
+      },
+      "ChartOptions": {
+        "properties": {
+          "house_system": {
+            "type": "string",
+            "enum": [
+              "P",
+              "W",
+              "K",
+              "A",
+              "R",
+              "C",
+              "B",
+              "M",
+              "O",
+              "E",
+              "V",
+              "X",
+              "H",
+              "T",
+              "G"
+            ],
+            "title": "House System",
+            "description": "The house system used for calculation. Different systems can place planets in different houses. Common systems: 'P' (Placidus), 'W' (Whole Sign), 'K' (Koch), 'A' (Equal), 'R' (Regiomontanus), 'C' (Campanus).",
+            "default": "P"
+          },
+          "zodiac_type": {
+            "type": "string",
+            "enum": [
+              "Tropic",
+              "Sidereal"
+            ],
+            "title": "Zodiac Type",
+            "description": "The zodiac type. 'Tropic' is used in Western astrology. 'Sidereal' is used in Vedic and some Western traditions. Note: The current library version defaults to FAGAN_BRADLEY ayanamsha for Sidereal charts.",
+            "default": "Tropic"
+          },
+          "active_points": {
+            "items": {
+              "type": "string",
+              "enum": [
+                "Sun",
+                "Moon",
+                "Mercury",
+                "Venus",
+                "Mars",
+                "Jupiter",
+                "Saturn",
+                "Uranus",
+                "Neptune",
+                "Pluto",
+                "Earth",
+                "Chiron",
+                "Ceres",
+                "Pallas",
+                "Juno",
+                "Vesta",
+                "Aphrodite",
+                "Persephone",
+                "Artemis",
+                "Mean_Node",
+                "True_Node",
+                "Mean_South_Node",
+                "True_South_Node",
+                "Mean_Lilith",
+                "True_Lilith",
+                "Ascendant",
+                "Medium_Coeli",
+                "Descendant",
+                "Imum_Coeli",
+                "Vertex",
+                "Part_of_Fortune",
+                "Part_of_Spirit",
+                "Aldebaran",
+                "Regulus",
+                "Antares",
+                "Fomalhaut",
+                "Sirius",
+                "Arcturus",
+                "Vega",
+                "Capella",
+                "Spica",
+                "Procyon",
+                "Algol",
+                "Rigel",
+                "Betelgeuse",
+                "Altair",
+                "Pollux",
+                "Deneb",
+                "Castor",
+                "Bellatrix",
+                "Alnilam",
+                "Alioth",
+                "Mirach",
+                "Hamal",
+                "Achernar"
+              ]
+            },
+            "type": "array",
+            "title": "Active Points",
+            "description": "🆕 List of celestial points to include. Now supports traditional points! New in v3.2.0: Part_of_Fortune, Part_of_Spirit, True_Lilith for Hellenistic astrology."
+          },
+          "precision": {
+            "type": "integer",
+            "maximum": 8.0,
+            "minimum": 0.0,
+            "title": "Precision",
+            "description": "🆕 Number of decimal places for degree values (0-8). Controls precision of all degree measurements including absolute longitude.",
+            "default": 2
+          },
+          "return_year": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Return Year",
+            "description": "Year for solar return calculations. When specified, overrides the subject's birth year for return chart calculations."
+          },
+          "return_date": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Return Date",
+            "description": "Alternative date format for return calculations. Can be used instead of return_year for more precise timing."
+          },
+          "target_date": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Target Date",
+            "description": "Target date for progression calculations. Specifies the date for which progressed positions should be calculated."
+          },
+          "perspective": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Perspective",
+            "description": "Astronomical calculation perspective. 'geocentric' (Earth-centered, traditional), 'heliocentric' (Sun-centered), 'draconic' (Moon's Node as 0° Aries), 'barycentric' (solar system center).",
+            "default": "geocentric"
+          },
+          "fixed_stars": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/FixedStarsConfig"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "🌟 Fixed stars configuration. Specify presets to include fixed star positions and conjunctions/oppositions to natal planets."
+          },
+          "use_cache": {
+            "type": "boolean",
+            "title": "Use Cache",
+            "description": "Use cached calculations if available. Set to False to force fresh calculations and bypass cache.",
+            "default": true
+          }
+        },
+        "type": "object",
+        "title": "ChartOptions"
+      },
+      "TransitTime": {
+        "properties": {
+          "datetime": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/DateTimeLocation"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Specific date/time for transit calculation (for SVG charts or single-point analysis)."
+          },
+          "date_range": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/DateRange"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Date range for transit event search (for transit reports and event lists)."
+          }
+        },
+        "type": "object",
+        "title": "TransitTime",
+        "description": "🆕 Unified transit time specification - accepts either a specific datetime OR a date range.\n\nUse `datetime` for single-point transit calculations (SVG charts, current transits).\nUse `date_range` for transit event searches over a period.\n\nIf both are provided, `datetime` takes precedence for single-point calculations,\nwhile `date_range` is used for event searches."
+      },
+      "ChartData": {
+        "properties": {
+          "planetary_positions": {
+            "items": {
+              "$ref": "#/components/schemas/PlanetaryPosition"
+            },
+            "type": "array",
+            "title": "Planetary Positions",
+            "description": "A list containing the positions of all calculated celestial points."
+          },
+          "house_cusps": {
+            "items": {
+              "$ref": "#/components/schemas/HouseCusp"
+            },
+            "type": "array",
+            "title": "House Cusps",
+            "description": "A list of the 12 house cusps."
+          },
+          "aspects": {
+            "items": {
+              "$ref": "#/components/schemas/Aspect"
+            },
+            "type": "array",
+            "title": "Aspects",
+            "description": "A list of all calculated aspects between the points."
+          },
+          "fixed_stars": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Fixed Stars",
+            "description": "Fixed stars data including conjunctions and oppositions to natal planets."
+          }
+        },
+        "type": "object",
+        "required": [
+          "planetary_positions",
+          "house_cusps",
+          "aspects"
+        ],
+        "title": "ChartData"
+      },
+      "PowerPeriodsConfig": {
+        "properties": {
+          "categories": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Categories",
+            "description": "Life area categories to find power periods for.",
+            "default": [
+              "career",
+              "love",
+              "finance"
+            ]
+          },
+          "top_n": {
+            "type": "integer",
+            "title": "Top N",
+            "description": "Number of best dates to return per category.",
+            "default": 5
+          }
+        },
+        "type": "object",
+        "title": "PowerPeriodsConfig",
+        "description": "Configuration for power periods calculation."
+      },
+      "StandardOptions": {
+        "properties": {
+          "house_system": {
+            "$ref": "#/components/schemas/HouseSystem",
+            "description": "House system to use",
+            "default": "P"
+          },
+          "language": {
+            "$ref": "#/components/schemas/Language",
+            "description": "Response language",
+            "default": "en"
+          },
+          "tradition": {
+            "$ref": "#/components/schemas/Tradition",
+            "description": "Astrological tradition",
+            "default": "universal"
+          },
+          "perspective": {
+            "$ref": "#/components/schemas/PerspectiveType",
+            "description": "Astronomical calculation perspective. Geocentric (Earth-centered) is traditional astrology. Other perspectives offer specialized insights.",
+            "default": "geocentric"
+          },
+          "detail_level": {
+            "$ref": "#/components/schemas/DetailLevel",
+            "description": "Level of detail in response",
+            "default": "standard"
+          },
+          "include_interpretations": {
+            "type": "boolean",
+            "title": "Include Interpretations",
+            "description": "Include textual interpretations",
+            "default": true
+          },
+          "include_raw_data": {
+            "type": "boolean",
+            "title": "Include Raw Data",
+            "description": "Include raw astronomical data",
+            "default": false
+          },
+          "use_cache": {
+            "type": "boolean",
+            "title": "Use Cache",
+            "description": "Use cached calculations if available",
+            "default": true
+          },
+          "precision_mode": {
+            "type": "boolean",
+            "title": "Precision Mode",
+            "description": "Use high-precision calculations (slower)",
+            "default": false
+          }
+        },
+        "type": "object",
+        "title": "StandardOptions",
+        "description": "Standard options applicable to all requests",
+        "example": {
+          "house_system": "P",
+          "language": "en",
+          "perspective": "geocentric",
+          "tradition": "universal"
+        }
+      },
+      "DateTimeLocation": {
+        "properties": {
+          "year": {
+            "type": "integer",
+            "title": "Year",
+            "description": "Year of the event (e.g., 1990)."
+          },
+          "month": {
+            "type": "integer",
+            "title": "Month",
+            "description": "Month of the event (1-12)."
+          },
+          "day": {
+            "type": "integer",
+            "title": "Day",
+            "description": "Day of the event (1-31)."
+          },
+          "hour": {
+            "type": "integer",
+            "title": "Hour",
+            "description": "Hour of the event (0-23)."
+          },
+          "minute": {
+            "type": "integer",
+            "title": "Minute",
+            "description": "Minute of the event (0-59)."
+          },
+          "second": {
+            "type": "integer",
+            "title": "Second",
+            "description": "🆕 Second of the event (0-59). Optional with default 0.",
+            "default": 0
+          },
+          "latitude": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Latitude",
+            "description": "Latitude of the location (-90 to 90 degrees). Required if city is not provided. Use positive for North, negative for South."
+          },
+          "longitude": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Longitude",
+            "description": "Longitude of the location (-180 to 180 degrees). Required if city is not provided. Use positive for East, negative for West."
+          },
+          "city": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "City",
+            "description": "City name for automatic coordinate and timezone lookup."
+          },
+          "country_code": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Country Code",
+            "description": "Country code (ISO 3166-1 alpha-2). Recommended for accuracy."
+          },
+          "timezone": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Timezone",
+            "description": "Timezone name from the TZ Database (e.g., 'Europe/London'). Required if city is not provided."
+          }
+        },
+        "type": "object",
+        "required": [
+          "year",
+          "month",
+          "day",
+          "hour",
+          "minute"
+        ],
+        "title": "DateTimeLocation"
+      },
+      "SpreadInfo": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "single",
+              "three_card",
+              "celtic_cross",
+              "zodiac_wheel",
+              "synastry",
+              "houses",
+              "custom"
+            ],
+            "title": "Type",
+            "description": "Type of spread"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name",
+            "description": "Spread name"
+          },
+          "card_count": {
+            "type": "integer",
+            "title": "Card Count",
+            "description": "Number of cards"
+          },
+          "positions": {
+            "items": {
+              "additionalProperties": {
+                "type": "string"
+              },
+              "type": "object"
+            },
+            "type": "array",
+            "title": "Positions",
+            "description": "Position descriptions"
+          }
+        },
+        "type": "object",
+        "required": [
+          "type",
+          "name",
+          "card_count",
+          "positions"
+        ],
+        "title": "SpreadInfo",
+        "description": "Spread layout information"
+      },
+      "Interpretation": {
+        "properties": {
+          "title": {
+            "type": "string",
+            "title": "Title",
+            "description": "The title of the interpretation (e.g., 'Sun in Aries')."
+          },
+          "text": {
+            "type": "string",
+            "title": "Text",
+            "description": "The interpretation text."
+          },
+          "components": {
+            "anyOf": [
+              {
+                "additionalProperties": {
+                  "$ref": "#/components/schemas/InterpretationComponent"
+                },
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Components",
+            "description": "Primary and secondary components involved (e.g., {'primary': Sun component, 'secondary': Aries component})."
+          },
+          "astrological_data": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/AstrologicalData"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Additional astrological data for this interpretation."
+          }
+        },
+        "type": "object",
+        "required": [
+          "title",
+          "text"
+        ],
+        "title": "Interpretation",
+        "description": "An single astrological interpretation with enhanced metadata."
+      },
+      "SVGOptions": {
+        "properties": {
+          "theme": {
+            "type": "string",
+            "enum": [
+              "light",
+              "dark",
+              "dark-high-contrast",
+              "classic"
+            ],
+            "title": "Theme",
+            "description": "Visual theme for the SVG chart output.",
+            "default": "dark"
+          },
+          "language": {
+            "type": "string",
+            "enum": [
+              "en",
+              "fr",
+              "pt",
+              "it",
+              "zh",
+              "es",
+              "ru",
+              "tr",
+              "de",
+              "hi",
+              "uk",
+              "ar",
+              "ko",
+              "nl",
+              "pl",
+              "ja",
+              "en-US",
+              "en-GB",
+              "en-ARCHAIC",
+              "pt-BR",
+              "pt-PT",
+              "es-MX",
+              "es-ES",
+              "fr-FR",
+              "fr-CA",
+              "zh-CN",
+              "zh-TW"
+            ],
+            "title": "Language",
+            "description": "Language for labels in the SVG chart output.",
+            "default": "en"
+          }
+        },
+        "type": "object",
+        "title": "SVGOptions"
+      },
+      "Aspect": {
+        "properties": {
+          "point1": {
+            "type": "string",
+            "title": "Point1",
+            "description": "The first celestial point in the aspect."
+          },
+          "point2": {
+            "type": "string",
+            "title": "Point2",
+            "description": "The second celestial point in the aspect."
+          },
+          "aspect_type": {
+            "type": "string",
+            "title": "Aspect Type",
+            "description": "The type of aspect (e.g., 'conjunction', 'trine', 'square')."
+          },
+          "orb": {
+            "type": "number",
+            "title": "Orb",
+            "description": "The orb of the aspect in degrees. This is the deviation from the exact angle of the aspect."
+          },
+          "peak_activations": {
+            "anyOf": [
+              {
+                "items": {
+                  "$ref": "#/components/schemas/PeakActivation"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Peak Activations",
+            "description": "Peak activation periods when this aspect becomes most prominent during the Solar Return year. Only included for Solar Return charts."
+          }
+        },
+        "type": "object",
+        "required": [
+          "point1",
+          "point2",
+          "aspect_type",
+          "orb"
+        ],
+        "title": "Aspect"
+      },
+      "HoroscopeOptions": {
+        "properties": {
+          "language": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "en",
+                  "fr",
+                  "pt",
+                  "it",
+                  "zh",
+                  "es",
+                  "ru",
+                  "tr",
+                  "de",
+                  "hi",
+                  "uk",
+                  "ar",
+                  "ko",
+                  "nl",
+                  "pl",
+                  "ja",
+                  "en-US",
+                  "en-GB",
+                  "en-ARCHAIC",
+                  "pt-BR",
+                  "pt-PT",
+                  "es-MX",
+                  "es-ES",
+                  "fr-FR",
+                  "fr-CA",
+                  "zh-CN",
+                  "zh-TW"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Language",
+            "description": "Response language (en, fr, de, es, it, pt, ru, hi, tr, uk)"
+          },
+          "tradition": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "universal",
+                  "psychological",
+                  "event_oriented",
+                  "classical"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Tradition",
+            "description": "Astrological tradition (universal, psychological, classical)"
+          }
+        },
+        "type": "object",
+        "title": "HoroscopeOptions",
+        "description": "Optional nested options for horoscope requests (for API consistency)."
+      },
+      "DateRange": {
+        "properties": {
+          "start_date": {
+            "$ref": "#/components/schemas/Date",
+            "description": "The start date for the transit search."
+          },
+          "end_date": {
+            "$ref": "#/components/schemas/Date",
+            "description": "The end date for the transit search."
+          }
+        },
+        "type": "object",
+        "required": [
+          "start_date",
+          "end_date"
+        ],
+        "title": "DateRange"
+      },
+      "app__api__v3__schemas__common__Subject": {
+        "properties": {
+          "name": {
+            "type": "string",
+            "title": "Name",
+            "description": "Name of the person or event. NOT required - you can use anonymous data like 'Person A', 'Client', or any placeholder. Only used for report titles and aspect descriptions. ⚠️ We NEVER store or log names - all data is processed in memory only.",
+            "default": "Subject"
+          },
+          "birth_data": {
+            "$ref": "#/components/schemas/DateTimeLocation",
+            "description": "The date, time, and location data for this subject."
+          }
+        },
+        "type": "object",
+        "required": [
+          "birth_data"
+        ],
+        "title": "Subject"
+      },
+      "RelationshipDynamics": {
+        "properties": {
+          "harmony_percentage": {
+            "type": "number",
+            "maximum": 100.0,
+            "minimum": 0.0,
+            "title": "Harmony Percentage",
+            "description": "Percentage of harmonious aspects (trines, sextiles, beneficial conjunctions). Range: 0-100."
+          },
+          "tension_percentage": {
+            "type": "number",
+            "maximum": 100.0,
+            "minimum": 0.0,
+            "title": "Tension Percentage",
+            "description": "Percentage of challenging aspects (squares, oppositions). Range: 0-100."
+          },
+          "dynamic_type": {
+            "type": "string",
+            "title": "Dynamic Type",
+            "description": "Overall relationship dynamic type."
+          },
+          "key_strengths": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Key Strengths",
+            "description": "Key harmonious aspects that support the relationship."
+          },
+          "growth_areas": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Growth Areas",
+            "description": "Challenging aspects that require conscious work."
+          },
+          "summary": {
+            "type": "string",
+            "title": "Summary",
+            "description": "Brief astrological summary of the relationship dynamics."
+          }
+        },
+        "type": "object",
+        "required": [
+          "harmony_percentage",
+          "tension_percentage",
+          "dynamic_type",
+          "summary"
+        ],
+        "title": "RelationshipDynamics",
+        "description": "Analysis of relationship harmony vs tension based on aspects."
+      },
+      "DataOptions": {
+        "properties": {
+          "house_system": {
+            "$ref": "#/components/schemas/HouseSystem",
+            "description": "House system to use",
+            "default": "P"
+          },
+          "language": {
+            "$ref": "#/components/schemas/Language",
+            "description": "Response language",
+            "default": "en"
+          },
+          "tradition": {
+            "$ref": "#/components/schemas/Tradition",
+            "description": "Astrological tradition",
+            "default": "universal"
+          },
+          "perspective": {
+            "$ref": "#/components/schemas/PerspectiveType",
+            "description": "Astronomical calculation perspective. Geocentric (Earth-centered) is traditional astrology. Other perspectives offer specialized insights.",
+            "default": "geocentric"
+          },
+          "detail_level": {
+            "$ref": "#/components/schemas/DetailLevel",
+            "description": "Level of detail in response",
+            "default": "standard"
+          },
+          "include_interpretations": {
+            "type": "boolean",
+            "title": "Include Interpretations",
+            "description": "Include textual interpretations",
+            "default": true
+          },
+          "include_raw_data": {
+            "type": "boolean",
+            "title": "Include Raw Data",
+            "description": "Include raw astronomical data",
+            "default": false
+          },
+          "use_cache": {
+            "type": "boolean",
+            "title": "Use Cache",
+            "description": "Use cached calculations if available",
+            "default": true
+          },
+          "precision_mode": {
+            "type": "boolean",
+            "title": "Precision Mode",
+            "description": "Use high-precision calculations (slower)",
+            "default": false
+          },
+          "zodiac_type": {
+            "type": "string",
+            "title": "Zodiac Type",
+            "description": "Zodiac type (Tropic/Sidereal)",
+            "default": "Tropic"
+          },
+          "active_points": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Active Points",
+            "description": "List of celestial bodies to include in calculations"
+          },
+          "precision": {
+            "type": "integer",
+            "maximum": 8.0,
+            "minimum": 0.0,
+            "title": "Precision",
+            "description": "Number of decimal places for degree values",
+            "default": 2
+          }
+        },
+        "type": "object",
+        "title": "DataOptions",
+        "description": "Extended options for data endpoints that include astrological calculation options",
+        "example": {
+          "house_system": "P",
+          "language": "en",
+          "perspective": "geocentric",
+          "tradition": "universal"
+        }
+      },
+      "CompositeData": {
+        "properties": {
+          "subject1": {
+            "title": "Subject1",
+            "description": "Detailed raw data for the first subject."
+          },
+          "subject2": {
+            "title": "Subject2",
+            "description": "Detailed raw data for the second subject."
+          },
+          "composite_subject": {
+            "title": "Composite Subject",
+            "description": "Detailed raw data for the composite chart (midpoint calculations)."
+          }
+        },
+        "type": "object",
+        "required": [
+          "subject1",
+          "subject2",
+          "composite_subject"
+        ],
+        "title": "CompositeData"
+      },
+      "ReportOptions": {
+        "properties": {
+          "tradition": {
+            "type": "string",
+            "enum": [
+              "universal",
+              "psychological",
+              "event_oriented",
+              "classical"
+            ],
+            "title": "Tradition",
+            "description": "The astrological tradition to use for interpretations. **universal**: A synthesis of modern psychological and classical methods, based on the works of Parker, Arroyo, and Hand. Recommended for most users. **psychological**: Focuses on inner potential and psychological development (based on Liz Greene). **event_oriented**: A more classical approach focused on concrete life events (based on Robert Zoller). **classical**: Interpretations based on Hellenistic and traditional astrology (Ptolemy, Valens), focusing on fortune and external outcomes.",
+            "default": "universal"
+          },
+          "language": {
+            "type": "string",
+            "enum": [
+              "en",
+              "fr",
+              "pt",
+              "it",
+              "zh",
+              "es",
+              "ru",
+              "tr",
+              "de",
+              "hi",
+              "uk",
+              "ar",
+              "ko",
+              "nl",
+              "pl",
+              "ja",
+              "en-US",
+              "en-GB",
+              "en-ARCHAIC",
+              "pt-BR",
+              "pt-PT",
+              "es-MX",
+              "es-ES",
+              "fr-FR",
+              "fr-CA",
+              "zh-CN",
+              "zh-TW"
+            ],
+            "title": "Language",
+            "description": "The language for the report's text.",
+            "default": "en"
+          }
+        },
+        "type": "object",
+        "title": "ReportOptions"
+      },
+      "app__api__v3__schemas__standard__Subject": {
+        "properties": {
+          "name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Name",
+            "description": "Subject's name",
+            "default": "Anonymous"
+          },
+          "birth_data": {
+            "$ref": "#/components/schemas/BirthData",
+            "description": "Subject's birth data"
+          },
+          "email": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Email",
+            "description": "Subject's email (for reports)"
+          },
+          "notes": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Notes",
+            "description": "Additional notes about subject"
+          }
+        },
+        "type": "object",
+        "required": [
+          "birth_data"
+        ],
+        "title": "Subject",
+        "description": "Standard subject model for a person/entity",
+        "example": {
+          "birth_data": {
+            "city": "London",
+            "country_code": "GB",
+            "day": 11,
+            "hour": 18,
+            "minute": 15,
+            "month": 5,
+            "year": 1985
+          },
+          "name": "John Doe"
+        }
+      },
+      "InterpretedTransitEvent": {
+        "properties": {
+          "date": {
+            "type": "string",
+            "title": "Date",
+            "description": "The date (UTC) when the transit is active or becomes exact."
+          },
+          "exact_time": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Exact Time",
+            "description": "The exact time (ISO format) when the aspect becomes perfect (0° orb). Only provided when precision timing is calculated."
+          },
+          "transiting_planet": {
+            "type": "string",
+            "title": "Transiting Planet",
+            "description": "The planet that is moving (in transit)."
+          },
+          "aspect_type": {
+            "type": "string",
+            "title": "Aspect Type",
+            "description": "The type of aspect (e.g., 'conjunction', 'trine')."
+          },
+          "stationed_planet": {
+            "type": "string",
+            "title": "Stationed Planet",
+            "description": "The planet in the natal or solar return chart being aspected."
+          },
+          "orb": {
+            "type": "number",
+            "title": "Orb",
+            "description": "The orb of the aspect in degrees."
+          },
+          "aspect_direction": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Aspect Direction",
+            "description": "Whether the aspect is 'applying' (forming), 'separating' (dissolving), or 'exact'."
+          },
+          "transiting_speed": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Transiting Speed",
+            "description": "Speed of the transiting planet in degrees/day. Negative values indicate retrograde motion."
+          },
+          "transiting_house": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Transiting House",
+            "description": "The house number (1-12) that the transiting planet is currently in."
+          },
+          "natal_house": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Natal House",
+            "description": "The natal house number (1-12) of the stationed planet."
+          },
+          "interpretation": {
+            "type": "string",
+            "title": "Interpretation",
+            "description": "The textual interpretation of the transit event."
+          }
+        },
+        "type": "object",
+        "required": [
+          "date",
+          "transiting_planet",
+          "aspect_type",
+          "stationed_planet",
+          "orb",
+          "interpretation"
+        ],
+        "title": "InterpretedTransitEvent"
+      },
+      "SynastryData": {
+        "properties": {
+          "subject1": {
+            "title": "Subject1",
+            "description": "Detailed raw data for the first subject."
+          },
+          "subject2": {
+            "title": "Subject2",
+            "description": "Detailed raw data for the second subject."
+          }
+        },
+        "type": "object",
+        "required": [
+          "subject1",
+          "subject2"
+        ],
+        "title": "SynastryData"
+      },
+      "ValidationError": {
+        "properties": {
+          "loc": {
+            "items": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                }
+              ]
+            },
+            "type": "array",
+            "title": "Location"
+          },
+          "msg": {
+            "type": "string",
+            "title": "Message"
+          },
+          "type": {
+            "type": "string",
+            "title": "Error Type"
+          },
+          "input": {
+            "title": "Input"
+          },
+          "ctx": {
+            "type": "object",
+            "title": "Context"
+          }
+        },
+        "type": "object",
+        "required": [
+          "loc",
+          "msg",
+          "type"
+        ],
+        "title": "ValidationError"
+      },
+      "DetailLevel": {
+        "type": "string",
+        "enum": [
+          "basic",
+          "standard",
+          "full",
+          "professional"
+        ],
+        "title": "DetailLevel",
+        "description": "Level of detail in responses"
+      },
+      "Tradition": {
+        "type": "string",
+        "enum": [
+          "universal",
+          "classical",
+          "psychological",
+          "event_oriented",
+          "vedic",
+          "chinese"
+        ],
+        "title": "Tradition",
+        "description": "Astrological traditions"
+      },
+      "TarotCard": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id",
+            "description": "Card identifier (e.g., 'major_04', 'wands_03')"
+          },
+          "name": {
+            "additionalProperties": {
+              "type": "string"
+            },
+            "type": "object",
+            "title": "Name",
+            "description": "Card name in multiple languages"
+          },
+          "arcana": {
+            "type": "string",
+            "enum": [
+              "major",
+              "minor"
+            ],
+            "title": "Arcana",
+            "description": "Major or Minor Arcana"
+          },
+          "number": {
+            "type": "integer",
+            "title": "Number",
+            "description": "Card number"
+          },
+          "suit": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Suit",
+            "description": "Suit for Minor Arcana"
+          },
+          "element": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Element",
+            "description": "Elemental correspondence"
+          },
+          "astrology": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Astrology",
+            "description": "Astrological correspondences"
+          },
+          "keywords": {
+            "additionalProperties": {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "type": "object",
+            "title": "Keywords",
+            "description": "Keywords for upright/reversed"
+          },
+          "life_areas": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Life Areas",
+            "description": "Associated life areas"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "name",
+          "arcana",
+          "number",
+          "keywords",
+          "life_areas"
+        ],
+        "title": "TarotCard",
+        "description": "Single tarot card data"
+      },
+      "InterpretationComponent": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id",
+            "description": "Standard identifier (e.g., 'Sun', 'Ari', 'House_5')."
+          },
+          "type": {
+            "type": "string",
+            "title": "Type",
+            "description": "Component type: 'planet', 'sign', 'house', 'aspect', 'angle'."
+          },
+          "translated_name": {
+            "type": "string",
+            "title": "Translated Name",
+            "description": "Localized name in the requested language."
+          },
+          "symbol": {
+            "type": "string",
+            "title": "Symbol",
+            "description": "Unicode astrological symbol (e.g., '☉', '♈', '⚹')."
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "type",
+          "translated_name",
+          "symbol"
+        ],
+        "title": "InterpretationComponent",
+        "description": "A component of an astrological interpretation (planet, sign, house, etc.)."
+      },
+      "HouseSystem": {
+        "type": "string",
+        "enum": [
+          "P",
+          "W",
+          "K",
+          "A",
+          "R",
+          "C",
+          "O",
+          "M"
+        ],
+        "title": "HouseSystem",
+        "description": "Supported house systems"
+      },
+      "BirthData": {
+        "properties": {
+          "year": {
+            "type": "integer",
+            "maximum": 2100.0,
+            "minimum": 1900.0,
+            "title": "Year",
+            "description": "Birth year"
+          },
+          "month": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "maximum": 12.0,
+                "minimum": 1.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Month",
+            "description": "Birth month (optional for some calculations)"
+          },
+          "day": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "maximum": 31.0,
+                "minimum": 1.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Day",
+            "description": "Birth day (optional for some calculations)"
+          },
+          "hour": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "maximum": 23.0,
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Hour",
+            "description": "Birth hour (24-hour format)",
+            "default": 12
+          },
+          "minute": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "maximum": 59.0,
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Minute",
+            "description": "Birth minute",
+            "default": 0
+          },
+          "second": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "maximum": 59.0,
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Second",
+            "description": "Birth second",
+            "default": 0
+          },
+          "city": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "City",
+            "description": "Birth city name"
+          },
+          "country_code": {
+            "anyOf": [
+              {
+                "type": "string",
+                "pattern": "^[A-Z]{2}$"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Country Code",
+            "description": "ISO 3166-1 alpha-2 country code"
+          },
+          "latitude": {
+            "anyOf": [
+              {
+                "type": "number",
+                "maximum": 90.0,
+                "minimum": -90.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Latitude",
+            "description": "Birth location latitude"
+          },
+          "longitude": {
+            "anyOf": [
+              {
+                "type": "number",
+                "maximum": 180.0,
+                "minimum": -180.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Longitude",
+            "description": "Birth location longitude"
+          },
+          "timezone": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Timezone",
+            "description": "IANA timezone (e.g., 'Europe/London')"
+          }
+        },
+        "type": "object",
+        "required": [
+          "year"
+        ],
+        "title": "BirthData",
+        "description": "Standardized birth data model\nSupports both city-based and coordinate-based location",
+        "example": {
+          "city": "London",
+          "country_code": "GB",
+          "day": 11,
+          "hour": 18,
+          "minute": 15,
+          "month": 5,
+          "second": 0,
+          "year": 1985
+        }
+      },
+      "PlanetaryPosition": {
+        "properties": {
+          "name": {
+            "type": "string",
+            "title": "Name",
+            "description": "Name of the celestial point (e.g., 'Sun', 'Moon', 'Ascendant')."
+          },
+          "sign": {
+            "type": "string",
+            "title": "Sign",
+            "description": "Zodiac sign the point is in using 3-letter abbreviations."
+          },
+          "degree": {
+            "type": "number",
+            "title": "Degree",
+            "description": "The degree within the zodiac sign (0.0 to 29.99). Precision controlled by 'precision' parameter."
+          },
+          "absolute_longitude": {
+            "type": "number",
+            "title": "Absolute Longitude",
+            "description": "The absolute longitude in degrees (0.0 to 360.0). Full zodiac position from 0° Aries."
+          },
+          "house": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "House",
+            "description": "The house number the point is in (1-12). None for perspectives where houses are not applicable (heliocentric, barycentric)."
+          },
+          "is_retrograde": {
+            "type": "boolean",
+            "title": "Is Retrograde",
+            "description": "Indicates if the planet is in retrograde motion. Not applicable to points like Ascendant."
+          },
+          "speed": {
+            "anyOf": [
+              {
+                "type": "number",
+                "maximum": 16.0,
+                "minimum": -3.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Speed",
+            "description": "Speed in longitude (degrees/day). Negative values indicate retrograde motion. Not applicable to house cusps and some points."
+          }
+        },
+        "type": "object",
+        "required": [
+          "name",
+          "sign",
+          "degree",
+          "absolute_longitude",
+          "is_retrograde"
+        ],
+        "title": "PlanetaryPosition"
+      },
+      "Date": {
+        "properties": {
+          "year": {
+            "type": "integer",
+            "title": "Year",
+            "description": "Year (e.g., 2024)."
+          },
+          "month": {
+            "type": "integer",
+            "title": "Month",
+            "description": "Month (1-12)."
+          },
+          "day": {
+            "type": "integer",
+            "title": "Day",
+            "description": "Day (1-31)."
+          }
+        },
+        "type": "object",
+        "required": [
+          "year",
+          "month",
+          "day"
+        ],
+        "title": "Date"
+      },
+      "PeakActivation": {
+        "properties": {
+          "date": {
+            "type": "string",
+            "title": "Date",
+            "description": "The date when the aspect reaches peak activation (YYYY-MM-DD format)."
+          },
+          "duration_days": {
+            "type": "integer",
+            "title": "Duration Days",
+            "description": "Duration of the peak activation period in days."
+          },
+          "strength": {
+            "type": "string",
+            "title": "Strength",
+            "description": "Relative strength of the activation period."
+          }
+        },
+        "type": "object",
+        "required": [
+          "date",
+          "duration_days",
+          "strength"
+        ],
+        "title": "PeakActivation",
+        "description": "Peak activation period for a Solar Return aspect."
+      },
+      "Language": {
+        "type": "string",
+        "enum": [
+          "en",
+          "es",
+          "fr",
+          "de",
+          "it",
+          "pt",
+          "ru",
+          "zh",
+          "ja",
+          "hi",
+          "tr",
+          "uk",
+          "ar",
+          "en-US",
+          "en-GB",
+          "en-ARCHAIC",
+          "pt-BR",
+          "pt-PT",
+          "es-MX",
+          "es-ES",
+          "fr-FR",
+          "fr-CA",
+          "zh-CN",
+          "zh-TW"
+        ],
+        "title": "Language",
+        "description": "Supported languages with regional variants"
+      },
+      "PerspectiveType": {
+        "type": "string",
+        "enum": [
+          "geocentric",
+          "heliocentric",
+          "draconic",
+          "barycentric"
+        ],
+        "title": "PerspectiveType",
+        "description": "Astronomical calculation perspective"
+      },
+      "AstrologicalData": {
+        "properties": {
+          "degree": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Degree",
+            "description": "Degree within sign (0-29.99) for planetary positions."
+          },
+          "house": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "House",
+            "description": "House number (1-12) if applicable."
+          },
+          "is_retrograde": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Is Retrograde",
+            "description": "True if planet is in retrograde motion."
+          },
+          "absolute_longitude": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Absolute Longitude",
+            "description": "Absolute zodiac longitude (0-360)."
+          },
+          "orb": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Orb",
+            "description": "Aspect orb in degrees (for aspect interpretations)."
+          }
+        },
+        "type": "object",
+        "title": "AstrologicalData",
+        "description": "Detailed astrological data for an interpretation."
+      },
+      "HouseCusp": {
+        "properties": {
+          "house": {
+            "type": "integer",
+            "title": "House",
+            "description": "House number (1-12)."
+          },
+          "sign": {
+            "type": "string",
+            "title": "Sign",
+            "description": "Zodiac sign on the cusp (the beginning) of the house."
+          },
+          "degree": {
+            "type": "number",
+            "title": "Degree",
+            "description": "The degree of the zodiac sign where the house cusp begins."
+          },
+          "absolute_longitude": {
+            "type": "number",
+            "title": "Absolute Longitude",
+            "description": "Absolute longitude of the house cusp (0-360 degrees)"
+          }
+        },
+        "type": "object",
+        "required": [
+          "house",
+          "sign",
+          "degree",
+          "absolute_longitude"
+        ],
+        "title": "HouseCusp"
+      }
+    }
+  },
+  "security": [
+    {
+      "BearerAuth": []
+    }
+  ]
+}
